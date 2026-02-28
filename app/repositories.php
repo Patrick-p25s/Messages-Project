@@ -55,14 +55,16 @@ function get_private_conversation(int $userA, int $userB, int $limit = 100): arr
         'SELECT pm.id, pm.sender_id, pm.receiver_id, pm.body, pm.created_at, u.name AS sender_name
          FROM private_messages pm
          JOIN users u ON u.id = pm.sender_id
-         WHERE (pm.sender_id = :a AND pm.receiver_id = :b)
-            OR (pm.sender_id = :b AND pm.receiver_id = :a)
+         WHERE (pm.sender_id = :a1 AND pm.receiver_id = :b1)
+            OR (pm.sender_id = :b2 AND pm.receiver_id = :a2)
          ORDER BY pm.created_at ASC
          LIMIT :limit'
     );
 
-    $stmt->bindValue(':a', $userA, PDO::PARAM_INT);
-    $stmt->bindValue(':b', $userB, PDO::PARAM_INT);
+    $stmt->bindValue(':a1', $userA, PDO::PARAM_INT);
+    $stmt->bindValue(':b1', $userB, PDO::PARAM_INT);
+    $stmt->bindValue(':b2', $userB, PDO::PARAM_INT);
+    $stmt->bindValue(':a2', $userA, PDO::PARAM_INT);
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     $stmt->execute();
 
