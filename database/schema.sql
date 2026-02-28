@@ -1,3 +1,4 @@
+-- Active: 1771914646028@@127.0.0.1@3306@messages_app
 CREATE DATABASE IF NOT EXISTS messages_app CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE messages_app;
 
